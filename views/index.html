@@ -1,71 +1,73 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>First ExpressApp</title>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-		<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
-		<link rel="stylesheet" href="/stylesheets/style.css">
-	</head>
-	
-	<body>
-	<div class="q1">
-		<div class="q1-wrapper">
-			<section class="input-area">
-				<form class="action-form">
-					<input type="text" name="product_name">
-					<input type="number" name="amount">
-					<select name="item-type">
-						<option value="produce">Produce</option>
-						<option value="grocery">Grocery</option>
-						<option value="diary">Diary</option>
-						<option value="meat">Meat</option>
-						<option value="other">Other</option>
-					</select>
-					<button type="submit" class="calculate">Add</button>	
-					<button type="button" class="remove">Remove all</button><br>	
-				</form>
-			</section>
-			<section class="price-summary"></section>
-			<section class="list-wrapper clearfix">
-				<div class="col-md-4">
-					<div class="produce shopping-container">
-						<div>
-	                        <h4>Produce</h4>
-	                    </div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="grocery shopping-container">
-						<div>
-	                        <h4>Grocery</h4>
-	                    </div>	
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="diary shopping-container">
-						<div>
-	                        <h4>Diary/Frozen Foods</h4>
-	                    </div>	
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="meat shopping-container">
-						<div>
-	                        <h4>Meats/Dell Items</h4>
-	                    </div>	
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="other shopping-container">
-						<div>
-	                        <h4>Other</h4>
-	                    </div>	
-					</div>
-				</div>
-			</section>
-		</div>
-	</div>
-	<script src="/javascripts/main.js"></script>
-	</body>
+  <head>
+    <title>First ExpressApp</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+
+  <body>
+  <div class="q1">
+    <div class="q1-wrapper">
+      <section class="input-area">
+        <form class="action-form">
+          <input type="text" name="product_name">
+          <input type="number" name="amount">
+          <select name="item-type">
+            <option value="produce">Produce</option>
+            <option value="grocery">Grocery</option>
+            <option value="diary">Diary</option>
+            <option value="meat">Meat</option>
+            <option value="other">Other</option>
+          </select>
+          <button type="submit" class="calculate">Add</button>
+          <button type="button" class="remove">Remove all</button><br>
+        </form>
+      </section>
+      <section class="price-summary"></section>
+      <section class="list-wrapper clearfix">
+        <div class="col-md-4">
+          <div class="produce shopping-container">
+            <div>
+              <h4>Produce</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="grocery shopping-container">
+            <div>
+              <h4>Grocery</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="diary shopping-container">
+            <div>
+              <h4>Diary/Frozen Foods</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="meat shopping-container">
+            <div>
+              <h4>Meats/Dell Items</h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="other shopping-container">
+            <div>
+              <h4>Other</h4>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script src="/javascripts/constants.js"></script>
+  <script src="/javascripts/list.js"></script>
+  <script src="/javascripts/app.js"></script>
+  </body>
 </html>
