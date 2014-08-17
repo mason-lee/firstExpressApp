@@ -5,70 +5,31 @@ var path = require('path');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var mongo = require('mongoskin');
-// var db = mongoose.connection;
-// mongoose.connect('mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o');
+mongoose.connect('mongodb://brent:masoncodecore@proximus.modulusmongo.net:27017/o5howapA');
 
-var db = mongo.db("mongodb://localhost:27017/shoppingManager", {native_parser:true});
-// make our db accessible to our router
-app.use(function(req, res, next) {
-	req.db = db;
-	next();
-});
-
-var Bear = require('./app/models/bear');
-// configure app to use bodyParser()
-// this will let us get the data from a POST
-app.use(bodyParser.urlencoded({ extended: true }));
+// Configure app to use bodyParser()
+// This will let us get the data from a POST
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
 app.use("/stylesheets", express.static(__dirname + "/stylesheets"));
 
-// view engine setup
+// View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-
-// set the port
 var port = process.env.PORT || 8080;
 
-// ROUTES FOR OUR API
-// ===================================================
+// Set up the base path '/' that just renders the index view
+var router = express.Router();
+router.get('/', function(req, res) { res.render('index'); });
+app.use('/', router);
 
-// get an instance of Express router
+// Set up the api routes all under the '/api' namespace
+var shoppingApi = require('./app/routes/api');
+app.use('/api/shopping-list', shoppingApi);
 
-// var router = express.Router();
-var routes = require('./routes/index');
-// var routes = require('./routes/userlist');
-
-// middleware to use for all requests
-routes.use(function(req, res, next) {
-	// do logging
-	console.log('Something is happening.');
-	next(); // make sure we go to the next routes and don't stop here.
-});
-
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-routes.get('/', function(req, res) {
-	res.json({ message: 'hooray! welcome to our api!'});
-});
-
-// REGISTER OUR ROUTES 
-// ===================================================
-app.use('/index', routes);
-
-// START THE SERVER
-// ===================================================
 app.listen(port);
 console.log('Magic happens on port ' + port);
-
-
-
-
-
-
-
-
-
