@@ -4,7 +4,7 @@ window.renderShoppingList = function() {
   // empty out wrapper
 
   // For each item in our JSON, add a list item
-  $.each(window.shoppingList.departments, function(department) {
+  // $.each(window.shoppingList.departments, function(department) {
     // Re-draw each of the lists with the new data
     // create a column, set the name to the department name
     // $.each(department.items, function(item)) {
@@ -14,17 +14,17 @@ window.renderShoppingList = function() {
     // var $parent = $("." + department);
     // console.log("department.name");
 
-    console.log(department);
-  });
+    // console.log(department);
+  // });
 }
 
 window.renderDepartmentOptions = function() {
-  var $departmentSelector = $('.department-select-thing');
-  $departmentSelector.empty()
-  $.each(window.shoppingList.departments, function(department) {
-    var $option = $('<option value="' + department.name + '">' + department.name + '</option>')
-    $departmentSelector.append($option);
-  });
+  // var $departmentSelector = $('.department-select-thing');
+  // $departmentSelector.empty()
+  // $.each(window.shoppingList.departments, function(department) {
+  //   var $option = $('<option value="' + department.name + '">' + department.name + '</option>')
+  //   $departmentSelector.append($option);
+  // });
 };
 
 window.addToShoppingList = function(category, name, amount) {
@@ -55,7 +55,7 @@ $(function() {
     e.preventDefault();
 
     // Get the selected product category
-    var category = $("select[name='item-type'] :selected").val();
+    var category = $("select[name='item-type'] option:selected").val();
 
     // Create list
     createListElement(category);

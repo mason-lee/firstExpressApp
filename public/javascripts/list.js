@@ -56,59 +56,60 @@ function createListElement(category) {
     return;
   }
 
-  // var itemWrapper = function() {
-    // A list of product name and amount
-    itemList = $("<div/>", {
-      "class": "item-list clearfix"
-    }).appendTo(parent);
+  // A list of product name and amount
+  itemList = $("<div/>", {
+    "class": "item-list clearfix"
+  }).appendTo(parent);
 
-    // Name of the product
-    $("<div/>", {
-      "class": "item-name col-md-7 pull-left",
-      "text": name
-    }).appendTo(itemList);
+  // Name of the product
+  $("<div/>", {
+    "class": "item-name col-md-7 pull-left",
+    "text": name
+  }).appendTo(itemList);
 
-    // Name of the price
-    $("<div/>", {
-      "class": "item-price col-md-3 pull-left",
-      "text": "$" + amount.toString()
-    }).appendTo(itemList);
+  // Name of the price
+  $("<div/>", {
+    "class": "item-price col-md-3 pull-left",
+    "text": "$" + amount.toString()
+  }).appendTo(itemList);
 
-    // Remove button
-    $("<div/>", {
-      "class": "remove-item pull-right",
-      "text": "remove",
-      click: function() {
-        // amount to be removed
-        var price_value = $(this).siblings(".item-price").html();
-        var price = parseFloat(price_value.replace("$", ""));
-        total = total - price * 1.10;
-        $(".price-summary").html("Total: $" + total.toFixed(2));
-        // remove this item list
-        $(this).parent().remove();
-      }
-    }).appendTo(itemList);
-  // };
+  // Remove button
+  $("<div/>", {
+    "class": "remove-item pull-right",
+    "text": "remove",
+    click: function() {
+      // amount to be removed
+      var price_value = $(this).siblings(".item-price").html();
+      var price = parseFloat(price_value.replace("$", ""));
+      total = total - price * 1.10;
+      $(".price-summary").html("Total: $" + total.toFixed(2));
+      // remove this item list
+      $(this).parent().remove();
+    }
+  }).appendTo(itemList);
 
-  // $.ajax({
-  //   type:'POST',
-  //   data: newList,
-  //   url: ApiEndpoints.update,
-  //   dataType: 'JSON'
-  // }).done(function(response) {
-  //   // if(response.msg === '') {
-  //     // Reset the form
-  //     name = $("input[name='product_name']").val("");
-  //     amount = $("input[name='amount']").val("");
 
-  //     // Update the list
-  //     alert('Should be updating?');
-  //   // }
-  //   // else {
-  //   //   // If something goes wrong, alert the error message that our service returned
-  //   //   alert('Error: ' + response.msg);
-  //   // }
-  // });
+  var request = $.ajax({
+    type:'POST',
+    data: newList,
+    url: ApiEndpoints.update,
+    dataType: 'JSON',
+    crossDomain: true,
+    success: function(data, status) {
+      console.log(data);
+    }
+  });
+
+  request.done(function(msg) {
+    // Reset the form
+    name = $("input[name='product_name']").val("");
+    amount = $("input[name='amount']").val("");
+    alert("Successfully posted the data.");
+  });
+
+  request.fail(function(msg) {
+    alert("The request has failed.");
+  });
 
   // Append total value to the price summary area
   total = total + parseFloat(amount) * 1.10;
