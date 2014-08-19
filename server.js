@@ -24,10 +24,13 @@ var port = process.env.PORT || 8080;
 
 // Set up the base path '/' that just renders the index view
 var router = express.Router();
+// Will handle any request that ends in /.
+// depends on where the router is "use()'d"
 router.get('/', function(req, res) { res.render('index'); });
 app.use('/', router);
 
 // Set up the api routes all under the '/api' namespace
+// Mason: It's same if you copy and paste code in api.js
 var shoppingApi = require('./app/routes/api');
 app.use('/api/shopping-list', shoppingApi);
 

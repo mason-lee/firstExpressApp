@@ -56,7 +56,7 @@ function createListElement(category) {
     return;
   }
 
-  var itemWrapper = function() {
+  // var itemWrapper = function() {
     // A list of product name and amount
     itemList = $("<div/>", {
       "class": "item-list clearfix"
@@ -88,27 +88,27 @@ function createListElement(category) {
         $(this).parent().remove();
       }
     }).appendTo(itemList);
-  };
+  // };
 
-  $.ajax({
-    type:'POST',
-    data: newList,
-    url: ApiEndpoints.update,
-    dataType: 'JSON'
-  }).done(function(response) {
-    if(response.msg === '') {
-      // Reset the form
-      name = $("input[name='product_name']").val("");
-      amount = $("input[name='amount']").val("");
+  // $.ajax({
+  //   type:'POST',
+  //   data: newList,
+  //   url: ApiEndpoints.update,
+  //   dataType: 'JSON'
+  // }).done(function(response) {
+  //   // if(response.msg === '') {
+  //     // Reset the form
+  //     name = $("input[name='product_name']").val("");
+  //     amount = $("input[name='amount']").val("");
 
-      // Update the list
-      alert('Should be updating?');
-    }
-    else {
-      // If something goes wrong, alert the error message that our service returned
-      alert('Error: ' + response.msg);
-    }
-  });
+  //     // Update the list
+  //     alert('Should be updating?');
+  //   // }
+  //   // else {
+  //   //   // If something goes wrong, alert the error message that our service returned
+  //   //   alert('Error: ' + response.msg);
+  //   // }
+  // });
 
   // Append total value to the price summary area
   total = total + parseFloat(amount) * 1.10;

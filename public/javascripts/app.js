@@ -1,22 +1,36 @@
 var name, amount = 0, total = 0;
 
 window.renderShoppingList = function() {
+  // empty out wrapper
+
   // For each item in our JSON, add a list item
   $.each(window.shoppingList.departments, function(department) {
     // Re-draw each of the lists with the new data
+    // create a column, set the name to the department name
+    // $.each(department.items, function(item)) {
+    //   create a li with item name and amount, append to the department column
+    // }
+
+    // var $parent = $("." + department);
+    // console.log("department.name");
+
+    console.log(department);
   });
 }
 
 window.renderDepartmentOptions = function() {
-  // Remove all <option> within the department select
+  var $departmentSelector = $('.department-select-thing');
+  $departmentSelector.empty()
   $.each(window.shoppingList.departments, function(department) {
-    // Add an option for each department.name
+    var $option = $('<option value="' + department.name + '">' + department.name + '</option>')
+    $departmentSelector.append($option);
   });
 };
 
 window.addToShoppingList = function(category, name, amount) {
   // Add the item to window.shoppingList
   // Submit post request
+  
 }
 
 // jQuery Ajax call for JSON

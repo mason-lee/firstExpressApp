@@ -24,8 +24,8 @@ router.post('/', function(req, res) {
       } else {
         res.json({error: err})
       }
-    }
-  }
+    });
+  });
 });
 
 module.exports = router;
