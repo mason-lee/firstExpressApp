@@ -4,9 +4,10 @@
 }
 
 .q1-wrapper {
-	width: 1024px;
+	width: 100%;
 	margin: 0 auto;
 }
+
 
 .input-area {
 	width: 70%;
@@ -39,4 +40,10 @@
 
 .shopping-container h4 {
 	text-align: center;
+}
+
+@media (min-width: 1024px) {
+	.q1-wrapper {
+		width: 100% !important;
+	}
 }

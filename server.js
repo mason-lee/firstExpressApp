@@ -9,6 +9,14 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://brent:masoncodecore@proximus.modulusmongo.net:27017/o5howapA');
 
+var db = mongoose.connection;
+db.on('error', function(err) {
+	console.log('connection error', err);
+});
+db.once('open', function(){
+	console.log('connected.');
+});
+
 // Configure app to use bodyParser()
 // This will let us get the data from a POST
 app.use(bodyParser.urlencoded({extended: true}));
@@ -34,10 +42,10 @@ app.use('/', router);
 // Set up the api routes all under the '/api' namespace
 // Mason: It's same if you copy and paste code in api.js
 
-// var shoppingApi = require('./app/routes/api');
+// var shoppingApi = require('/app/routes/api');
 // app.use('/api/shopping-list', shoppingApi);
 
-// var ShoppingList = require('././app/models/shopping_list');
+// var ShoppingList = require('/app/models/shopping_list');
 
 
 var Schema = mongoose.Schema;
@@ -45,13 +53,16 @@ var Schema = mongoose.Schema;
 // A shopping list is just a collection of named Departments
 // with items (productNames and Amounts) inside
 var ShoppingListSchema = new Schema({
-  departments: [{
-    name: String,
-    items: [{
-      name: String,
-      amount: Number
-    }]
-  }]
+  // departments: [{
+  //   name: String,
+  //   items: [{
+  //     name: String,
+  //     amount: Number
+  //   }]
+  // }]
+  category: String,
+  name: String,
+  amount: Number
 });
 
 // Define the model using the above schema
@@ -61,13 +72,14 @@ var model = mongoose.model('ShoppingList', ShoppingListSchema);
 // Add a function to the model class to create a default shopping list
 model.createEmptyList = function(completeCallback) {
   return model.create({
-    departments: [
-      {name: 'Produce', items: [{name: 'Banana', amount: 12}]},
-      {name: 'Grocery', items: []},
-      {name: 'Dairy/Frozen Foods', items: [{name: 'Yogurt', amount: 5.99}]},
-      {name: 'Meats/Deli Items', items: []},
-      {name: 'Other', items: []},
-    ]
+    // departments: [
+    //   {name: 'Produce', items: [{name: 'Banana', amount: 12}]},
+    //   {name: 'Grocery', items: []},
+    //   {name: 'Dairy/Frozen Foods', items: [{name: 'Yogurt', amount: 5.99}]},
+    //   {name: 'Meats/Deli Items', items: []},
+    //   {name: 'Other', items: []},
+    // ]
+    category: 'produce', name: 'lays', amount: 78
   }, completeCallback);
 }
 
@@ -95,19 +107,37 @@ router.post('/api/shopping-list', function(req, res) {
 });
 
 router.get('/api/shopping-list', function(req, res) {
-	model.find().exec(function(err, value) {
-		var renderResponse = function(list) {
-			res.json(list);
+	// model.find().exec(function(err, value) {
+	// 	var renderResponse = function(list) {
+	// 		res.json(list);
+	// 	};
+
+	// 	if(value.length==0) {
+	// 		model.createEmptyList(function(err, newList) {
+	// 			renderResponse(newList);
+	// 		});
+	// 	}
+	// 	else {
+	// 		renderResponse(value);
+	// 	}
+	// });
+
+	// Is it same as the code above?
+	model.find(function(err, shopList) {
+
+		var renderResponse = function(list){
+			res.send(list);
 		};
 
-		if(value.length==0) {
+		if(shopList.length == 0) {
 			model.createEmptyList(function(err, newList) {
 				renderResponse(newList);
 			});
 		}
 		else {
-			renderResponse(value);
+			renderResponse(shopList);
 		}
+
 	});
 });	
 
